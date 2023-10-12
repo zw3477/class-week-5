@@ -33,6 +33,24 @@ double WINAPI xll_tgamma(double x)
 	return tgamma(x);
 }
 
+AddIn xai_moneyness(
+	Function(XLL_DOUBLE, "xll_moneyness", "MONEYNESS")
+	.Arguments({
+		Arg(XLL_DOUBLE, "f", "is the forward."),
+		Arg(XLL_DOUBLE, "s", "is the vol."),
+		Arg(XLL_DOUBLE, "k", "is the strike.") 
+		})
+	.FunctionHelp("Return the moneyness value.")
+	.Category("NYU")
+);
+// WINAPI calling convention must be specified
+double WINAPI xll_moneyness(double f, double s, double k)
+{
+#pragma XLLEXPORT // must be specified to export function
+
+	return moneyness(f,s,k);
+}
+
 // Press Alt-F8 then type 'XLL.MACRO' to call 'xll_macro'
 // See https://xlladdins.github.io/Excel4Macros/
 AddIn xai_macro(
